@@ -124,10 +124,3 @@ The confusion matrix shows significant misclassification for `glioma` (96 as `me
 
 The model excels at identifying `pituitary` and `notumor`, likely due to their distinct features, but struggles with `glioma` and `meningioma` due to visual similarities with other classes. The test accuracy (65.83%) being higher than the training accuracy (57.76%) indicates good generalization, but the high training loss and limited epochs (2) suggest underfitting. Class imbalance (`notumor` has 405 test samples, others have 300-306) may also bias the model toward `notumor` and `pituitary`. Training for more epochs and addressing class imbalance could improve performance.
 
-## Task 3: Morphological Operations for Preprocessing
-
-### Generation of Structuring Element
-
-For morphological operations, we use the function `strel` to generate different kinds of structuring elements (SEs). Here is a list of SEs that `strel` can generate:
-
-
