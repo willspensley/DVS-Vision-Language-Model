@@ -3,15 +3,14 @@
 # Brain Tumor Classification Using CLIP
 
 ## 📖 Project Overview
-This project focuses on classifying MRI scans into four categories—`glioma`, `meningioma`, `notumor`, and `pituitary`—using a fine-tuned CLIP model (`clip-vit-base-patch32`). We leverage CLIP's vision-language capabilities to combine MRI images with descriptive captions, enabling the model to learn meaningful representations for classification. The project was developed as part of the *Design of Visual Systems* course at Imperial College London.
+This project focuses on classifying MRI scans into four categories—`glioma`, `meningioma`, `notumor`, and `pituitary`—using a fine-tuned CLIP model (`clip-vit-base-patch32`). Leveraging CLIP's vision-language capabilities to combine MRI images with descriptive captions, enabling the model to learn meaningful representations for classification. The project was developed as part of the *Design of Visual Systems* course at Imperial College London.
 
 ### Key Achievements
 - Fine-tuned the CLIP model on the Brain Tumor MRI dataset for 2 epochs.
-- Implemented data augmentation (random horizontal flips and rotations) to enhance model generalization.
+- Implemented data augmentation (random horizontal flips and rotations) to enhance model generalisation.
 - Logged training and evaluation metrics, including per-class accuracy, precision, recall, and F1-score.
-- Generated comprehensive visualizations to analyze model performance, such as training loss, training vs. test accuracy, per-class accuracy, per-class F1-score, and confusion matrix.
+- Generated comprehensive visualisations to analyse model performance, such as training loss, training vs. test accuracy, per-class accuracy, per-class F1-score, and confusion matrix.
 - Saved the fine-tuned model weights for reproducibility.
-- Explored morphological operations to understand their potential application in preprocessing MRI images (see the Morphological Operations section below).
 
 ---
 
@@ -22,25 +21,15 @@ This project focuses on classifying MRI scans into four categories—`glioma`, `
 - A Mac M1 or compatible device (CPU/GPU support for PyTorch)
 - Git installed for cloning the repository
 
-### Installation Steps
-1. **Clone the Repository**:
-   ```bash
-   git clone <repository-url>
-   cd brain-tumor-classification
-
-   
-2. **Set Up the Virtual Environment**:
-
-Create and activate a virtual environment, then install the required dependencies:
-python -m venv vlm_env
-source vlm_env/bin/activate
-pip install -r requirements.txt
-
-
-3. **Download the Dataset**:
+ **Download the Dataset**:
 
 - Download the Brain Tumor MRI dataset from [Kaggle](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset).
-- Place the dataset in a folder named `brain_tumor_data` at the same level as the repository, with the following structure:
+- Place the dataset in a folder named `brain_tumor_data`.
+
+
+### Training Script (`train_vlm.py`)
+
+Below is the content of the `train_vlm.py` script, which you can copy and paste into a file named `train_vlm.py` above to train the CLIP model. 
 
 
 This script will:
@@ -50,27 +39,16 @@ This script will:
   - `model_weights.pth`
   - `training_metrics.json`
   - `evaluation_metrics.json`
-  - Visualization PNGs (moved to `assets` for the repository)
-
-### Code Structure
-
-The project code is within the file
-
-- `train_vlm.py`
-- This code does the following--
-- Defines the `MRIDataset` class and a custom collation function.
-- Implements the training loop and saves training metrics.
-- Evaluates the model and calculates per-class metrics.
-- Generates visualizations (training loss, accuracy plots, confusion matrix).
-- Orchestrates the entire pipeline (training, evaluation, visualization).
+  - Visualisation PNGs (moved to `assets` for the repository)
+ 
 - `model_weights.pth`: The fine-tuned model weights (~600MB, available upon request as too large to upload to Github).
 - `training_metrics.json`, `evaluation_metrics.json`: Saved metrics are save on this repository.
 
-## Task 2: Model Evaluation and Results
+## Model Evaluation and Results
 
 ### Overview of Performance
 
-After training the CLIP model for 2 epochs, we achieved an overall test accuracy of 65.83%. Below are the detailed metrics, visualizations, and a comprehensive analysis of the model’s performance.
+After training the CLIP model for 2 epochs, I achieved an overall test accuracy of 65.83%. Below are the detailed metrics, visualisations, and a comprehensive analysis of the model’s performance.
 
 ### Detailed Metrics
 
@@ -108,7 +86,7 @@ The training loss fluctuates between 1.0 and 5.0, with a general downward trend 
 
 <p align="center"> <img src="assets/train_vs_test_accuracy.png" /> </p>
 
-Training accuracy increases from 34.21% (epoch 1) to 57.76% (epoch 2), while test accuracy is 65.83%, suggesting good generalization but potential underfitting.
+Training accuracy increases from 34.21% (epoch 1) to 57.76% (epoch 2), while test accuracy is 65.83%, suggesting good generalisation but potential underfitting.
 
 <p align="center"> <img src="assets/per_class_accuracy.png" /> </p>
 
@@ -137,15 +115,15 @@ The confusion matrix shows significant misclassification for `glioma` (96 as `me
 - **Class Imbalance**: The dataset has slight class imbalance (`notumor` has 405 test samples, while `glioma` and `pituitary` have 300 each, and `meningioma` has 306), which may contribute to the model’s bias towards `notumor` and `pituitary`.
 - **Low Recall for `glioma`**: Despite high precision for `glioma` (0.8761), the recall is low (0.3300), meaning the model misses many actual `glioma` cases.
 
-## Task 3: Reflections and Future Improvements
+## Reflections and Future Improvements
 
 ### Reflections
 
-This project taught us how to fine-tune a vision-language model like CLIP for medical imaging. We learned the importance of logging metrics, saving model weights, and using visualisations to analyse performance. The process of setting up the dataset, training the model, and evaluating its performance provided valuable insights into deep learning workflows.
+This project taught me how to fine-tune a vision-language model like CLIP for medical imaging. I learned the importance of logging metrics, saving model weights, and using visualisations to analyse performance. The process of setting up the dataset, training the model, and evaluating its performance provided valuable insights into deep learning workflows.
 
 ### Future Improvements
 
-To improve the model’s performance, we could:
+To improve the model’s performance, I could:
 
 - Train for more epochs (e.g., 5-10) to allow convergence.
 - Address class imbalance by oversampling `glioma` and `meningioma` or using a weighted loss function.
@@ -172,16 +150,16 @@ I contributed to the project by:
 
 **Design Decisions**:
 
-- We chose CLIP because it combines vision and language, which we thought would be effective for MRI classification with captions.
-- We used a small batch size (8) to accommodate my Mac M1’s limited RAM (8GB).
-- We included data augmentation (random flips and rotations) to improve generalisation.
-- We trained for 2 epochs initially to test the pipeline, with plans to increase epochs for better performance.
+- I chose CLIP because it combines vision and language, which I thought would be effective for MRI classification with captions.
+- I used a small batch size (8) to accommodate my Mac M1’s limited RAM (8GB).
+- I included data augmentation (random flips and rotations) to improve generalisation.
+- I trained for 2 epochs initially to test the pipeline, with plans to increase epochs for better performance.
 
 **Mistakes Made**:
 
 - Initially, I didn’t save the model weights, which meant we had to retrain from scratch after interruptions.
-- We underestimated the number of epochs needed for convergence, leading to suboptimal performance on `glioma` and `meningioma`.
-- We didn’t address class imbalance, which likely contributed to the model’s bias towards `notumor` and `pituitary`.
+- I underestimated the number of epochs needed for convergence, leading to suboptimal performance on `glioma` and `meningioma`.
+- I didn’t address class imbalance, which likely contributed to the model’s bias towards `notumor` and `pituitary`.
 
 **What I Would Do Differently**:
 
