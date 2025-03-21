@@ -121,8 +121,71 @@ F1-scores reflect the accuracy trends: `notumor` (0.8077), `pituitary` (0.7009),
 <p align="center"> <img src="assets/confusion_matrix.png" /> </p>
 
 The confusion matrix shows significant misclassification for `glioma` (96 as `meningioma`, 105 as `pituitary`) and `meningioma` (52 as `notumor`, 74 as `pituitary`).
+### Evaluation
 
-### Comment on the Results
+#### What the Application Can Do
 
-The model excels at identifying `pituitary` and `notumor`, likely due to their distinct features, but struggles with `glioma` and `meningioma` due to visual similarities with other classes. The test accuracy (65.83%) being higher than the training accuracy (57.76%) indicates good generalization, but the high training loss and limited epochs (2) suggest underfitting. Class imbalance (`notumor` has 405 test samples, others have 300-306) may also bias the model toward `notumor` and `pituitary`. Training for more epochs and addressing class imbalance could improve performance.
+- **Classify MRI Scans**: The model can classify MRI scans into four categories with an overall test accuracy of 65.83%.
+- **High Performance on Some Classes**: The model performs well on `pituitary` (93.33% accuracy) and `notumor` (77.28% accuracy), indicating it has learned distinct features for these classes.
+- **Generalisation**: The test accuracy (65.83%) is higher than the training accuracy after 2 epochs (57.76%), suggesting the model generalises well to unseen data.
+- **Visualise Performance**: The application generates detailed visualisations to analyse training progress and evaluation results.
 
+#### What the Application Cannot Do
+
+- **Struggles with `glioma` and `meningioma`**: The model has lower accuracy for `glioma` (33.00%) and `meningioma` (55.88%). The confusion matrix shows significant misclassification of `glioma` as `meningioma` (96) and `pituitary` (105), and `meningioma` as `notumor` (52) and `pituitary` (74).
+- **Limited Training**: Training for only 2 epochs is insufficient for the model to fully converge, as evidenced by the high and fluctuating training loss (e.g., ending at 2.2812). More epochs are needed for better performance.
+- **Class Imbalance**: The dataset has slight class imbalance (`notumor` has 405 test samples, while `glioma` and `pituitary` have 300 each, and `meningioma` has 306), which may contribute to the model’s bias towards `notumor` and `pituitary`.
+- **Low Recall for `glioma`**: Despite high precision for `glioma` (0.8761), the recall is low (0.3300), meaning the model misses many actual `glioma` cases.
+
+## Task 3: Reflections and Future Improvements
+
+### Reflections
+
+This project taught us how to fine-tune a vision-language model like CLIP for medical imaging. We learned the importance of logging metrics, saving model weights, and using visualisations to analyse performance. The process of setting up the dataset, training the model, and evaluating its performance provided valuable insights into deep learning workflows.
+
+### Future Improvements
+
+To improve the model’s performance, we could:
+
+- Train for more epochs (e.g., 5-10) to allow convergence.
+- Address class imbalance by oversampling `glioma` and `meningioma` or using a weighted loss function.
+- Experiment with different learning rates or optimisers (e.g., AdamW).
+- Use a GPU (e.g., on Google Colab) to speed up training and allow for larger batch sizes.
+
+## Personal Statements
+
+### William Spensley (Single submission, no partner was involved for this project)
+
+I contributed to the project by:
+
+- Setting up the initial CLIP model and dataset loading.
+- Implementing the training loop and handling errors to ensure stability on my Mac M1.
+- Working on saving metrics and generating visualisations to analyse the model’s performance.
+- Managing the GitHub repository setup and ensuring all deliverables were included.
+
+**What I Learned**:
+
+- How to fine-tune a vision-language model like CLIP for a medical imaging task.
+- The importance of logging metrics and saving model weights to avoid losing progress.
+- Techniques for evaluating model performance, such as per-class accuracy, precision, recall, F1-score, and confusion matrices.
+- How to interpret visualisations to understand model strengths and weaknesses.
+
+**Design Decisions**:
+
+- We chose CLIP because it combines vision and language, which we thought would be effective for MRI classification with captions.
+- We used a small batch size (8) to accommodate my Mac M1’s limited RAM (8GB).
+- We included data augmentation (random flips and rotations) to improve generalisation.
+- We trained for 2 epochs initially to test the pipeline, with plans to increase epochs for better performance.
+
+**Mistakes Made**:
+
+- Initially, I didn’t save the model weights, which meant we had to retrain from scratch after interruptions.
+- We underestimated the number of epochs needed for convergence, leading to suboptimal performance on `glioma` and `meningioma`.
+- We didn’t address class imbalance, which likely contributed to the model’s bias towards `notumor` and `pituitary`.
+
+**What I Would Do Differently**:
+
+- Train for more epochs (e.g., 5-10) to improve performance and allow the model to converge.
+- Use a GPU (e.g., on Google Colab) to speed up training and allow for larger batch sizes.
+- Address class imbalance by oversampling `glioma` and `meningioma` images or using weighted loss functions.
+- Experiment with different learning rates or optimisers to improve training stability.
