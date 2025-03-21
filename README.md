@@ -76,9 +76,9 @@ After training the CLIP model for 2 epochs, I achieved an overall test accuracy 
     - Recall: 0.9333
     - F1-Score: 0.7009
 
-### Visualizations
+### Visualisations
 
-We generated several visualizations to analyze the model’s performance:
+I generated several visualizations to analyze the model’s performance:
 
 <p align="center"> <img src="assets/training_loss.png" /> </p>
 
