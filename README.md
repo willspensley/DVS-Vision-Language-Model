@@ -54,15 +54,17 @@ This script will:
 
 ### Code Structure
 
-The project code is organized in the `code` folder:
+The project code is within the file
 
-- `dataset.py`: Defines the `MRIDataset` class and a custom collation function.
-- `train.py`: Implements the training loop and saves training metrics.
-- `evaluate.py`: Evaluates the model and calculates per-class metrics.
-- `visualize.py`: Generates visualizations (training loss, accuracy plots, confusion matrix).
-- `main.py`: Orchestrates the entire pipeline (training, evaluation, visualization).
-- `model_weights.pth`: The fine-tuned model weights (~600MB, available upon request).
-- `training_metrics.json`, `evaluation_metrics.json`: Saved metrics.
+- `train_vlm.py`
+- This code does the following--
+- Defines the `MRIDataset` class and a custom collation function.
+- Implements the training loop and saves training metrics.
+- Evaluates the model and calculates per-class metrics.
+- Generates visualizations (training loss, accuracy plots, confusion matrix).
+- Orchestrates the entire pipeline (training, evaluation, visualization).
+- `model_weights.pth`: The fine-tuned model weights (~600MB, available upon request as too large to upload to Github).
+- `training_metrics.json`, `evaluation_metrics.json`: Saved metrics are save on this repository.
 
 ## Task 2: Model Evaluation and Results
 
